@@ -30,8 +30,10 @@ public class SecurityConfig {
 				.anyRequest().authenticated())
 				.formLogin(login->login.loginPage("/logon").loginProcessingUrl("/logon")
 				.usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/admin", true));
-		
+				.defaultSuccessUrl("/admin", true))
+				.logout(logout->logout.logoutUrl("/admin-logout").logoutSuccessUrl("/logon"))
+				
+		;
 		return http.build();
 	}
 	
