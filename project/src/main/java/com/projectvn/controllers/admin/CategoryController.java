@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.projectvn.models.Category;
 import com.projectvn.services.CategorySercive;
@@ -66,7 +67,7 @@ public class CategoryController {
 		}
 	}
 	@GetMapping("/delete-category/{id}")
-	public String delete(@PathVariable("id") Integer id) {
+	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		if(this.categorySercive.delete(id)) {
 			return "redirect:/admin/category";			
 		} else {

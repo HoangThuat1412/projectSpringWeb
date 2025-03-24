@@ -1,11 +1,14 @@
 package com.projectvn.models;
 
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,8 @@ public class Category {
 	private String categoryName;
 	@Column(name = "categoryStatus")
 	private Boolean categoryStatus;
+	@OneToMany(mappedBy = "category")
+	private Set<Product> products;
 
 
 	public Category() {
@@ -26,13 +31,13 @@ public class Category {
 	}
 	
 	
-	public Category(Integer id, String categoryName, Boolean categoryStatus) {
+	public Category(Integer id, String categoryName, Boolean categoryStatus, Set<Product> products) {
 		super();
 		this.id = id;
 		this.categoryName = categoryName;
 		this.categoryStatus = categoryStatus;
+		this.products = products;
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -58,4 +63,11 @@ public class Category {
 		this.categoryStatus = categoryStatus;
 	}
 	
+	public Set<Product> getProducts() {
+		return products;
+	}
+	
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 }
