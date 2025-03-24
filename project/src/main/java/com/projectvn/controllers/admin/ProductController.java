@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.projectvn.models.Category;
 import com.projectvn.models.Product;
 import com.projectvn.services.CategorySercive;
+import com.projectvn.services.ProductService;
+import com.projectvn.services.StorageService;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,9 +23,18 @@ public class ProductController {
 	
 	@Autowired
 	private CategorySercive categorySercive;
+	
+	@Autowired
+	private StorageService storageService;
+	
+	@Autowired
+	private ProductService productService;
 	@RequestMapping("/product")
-	public String index() {
+	public String index(Model model) {
 		
+		List<Product> listCategory = this.productService.getAll();
+		
+		model.addAttribute("listCategory", listCategory);
 		return "admin/product/index";
 	}
 	
@@ -41,8 +52,15 @@ public class ProductController {
 	}
 	
 	@PostMapping("/product-add")
-	public String save(@ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) {
+	public String save(@ModelAttribute("product") Product product, @RequestParam("fileImage") MultipartFile file) {
 		
-		return "redirect:/admin/product";
+		//Upload file
+		this.storageService.store(file);
+		String fileName = file.getOriginalFilename();
+		product.setImage(fileName);
+		if(this.productService.create(product)) {
+			return "redirect:/admin/product";
+		}
+		return "admin/product/add";
 	}
 }

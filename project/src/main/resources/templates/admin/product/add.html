@@ -24,7 +24,7 @@
                         </div>
                         
                         <form role="form" method="post" th:action="@{/admin/product-add}"
-                            th:object="${product}" >
+                            th:object="${product}" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="productName">Product Name</label>

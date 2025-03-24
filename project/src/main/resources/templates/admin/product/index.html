@@ -34,30 +34,33 @@
 
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Danh sách danh mục</h3>
-              <div>
-              <a class="btn btn-success" href="add-category">Thêm mới danh mục</a>
-              </div>
-              
+              <h3 class="box-title">Danh sách sản phẩm</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
                 <tbody><tr>
                   <th style="width: 10px">ID</th>
-                  <th>Category name</th>
-                  <th>Status</th>
+                  <th>Product name</th>
+                  <th>Price</th>
+                  <th>Image</th>
+                  <th>Category</th>
                   <th>Action</th>
                 </tr>
                 
-                <tr th:each="category : ${list}">
-                  <td th:text="${category.id}" ></td>
-                  <td th:text="${category.categoryName}"></td>
-       			 <td th:if="${category.categoryStatus}"><span class="label label-success">Hiện</span></td>
-       			 <td th:if="${!category.categoryStatus}"><span class="label label-danger">Ẩn</span></td>
+                <tr th:each="product : ${listCategory}">
+                  <td th:text="${product.id}" ></td>
+                  <td th:text="${product.productName}"></td>
+                  <td th:text="${product.price}"></td>
+					<td >
+						<img th:src="@{'/uploads/'+${product.image}}" width="150px" alt="User Image">
+					</td>
+			<!--  	<td th:text="${product.category.categoryName}"></td>-->
+					
+                  
                   <td>
-                  <a th:href="@{/admin/edit-category/{id}(id=${category.id})}" class="btn btn-success">Edit</a>
-                  <a th:href="@{/admin/delete-category/{id}(id=${category.id})}" onClick="return confirm('Bạn chắc chắn không')" class="btn btn-danger">Delete</a>
+                  <a  class="btn btn-success">Edit</a>
+                  <a  onClick="return confirm('Bạn chắc chắn không')" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
                   

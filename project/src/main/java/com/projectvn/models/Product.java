@@ -22,7 +22,7 @@ public class Product {
 	private Double price;
 	@Column(name = "image")
 	private String image;
-	@Column(name = "description")
+	@Column(name = "description", length = 4000)
 	private String description;
 	
 	@ManyToOne
