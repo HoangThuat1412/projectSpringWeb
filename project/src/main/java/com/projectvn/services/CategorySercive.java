@@ -10,4 +10,5 @@ public interface CategorySercive {
 	Category findById(Integer id);
 	Boolean update(Category category);
 	Boolean delete(Integer id);
+	List<Category> searchCategory(String keyword);
 }

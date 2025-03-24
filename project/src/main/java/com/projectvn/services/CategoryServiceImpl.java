@@ -64,4 +64,10 @@ public class CategoryServiceImpl  implements CategorySercive{
 		return false;
 	}
 
+	@Override
+	public List<Category> searchCategory(String keyword) {
+		// TODO Auto-generated method stub
+		return this.categoryRepository.searchCategory(keyword);
+	}
+
 }
