@@ -34,9 +34,13 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	@RequestMapping("/product")
-	public String index(Model model) {
+	public String index(Model model, @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
 		
 		List<Product> listCategory = this.productService.getAll();
+		if(keyword != null) {
+			listCategory = this.productService.searchProduct(keyword);
+			model.addAttribute("keyword", keyword);
+		}
 		
 		model.addAttribute("listCategory", listCategory);
 		return "admin/product/index";

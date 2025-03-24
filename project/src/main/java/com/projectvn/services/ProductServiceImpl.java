@@ -64,5 +64,11 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return false;
 	}
+
+	@Override
+	public List<Product> searchProduct(String keyword) {
+		// TODO Auto-generated method stub
+		return this.productRepository.searchProduct(keyword);
+	}
 	
 }

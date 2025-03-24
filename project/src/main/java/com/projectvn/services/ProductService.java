@@ -10,4 +10,5 @@ public interface ProductService {
 	Product findById(Integer id);
 	Boolean update(Product product);
 	Boolean delete(Integer id);
+	List<Product> searchProduct(String keyword);
 }
