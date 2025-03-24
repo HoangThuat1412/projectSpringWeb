@@ -36,19 +36,33 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product findById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.productRepository.findById(id).get();
 	}
 
 	@Override
 	public Boolean update(Product product) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.productRepository.save(product);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override
 	public Boolean delete(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.productRepository.delete(findById(id));
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }

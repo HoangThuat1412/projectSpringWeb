@@ -2,8 +2,6 @@ package com.projectvn.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.projectvn.models.Product;
 
 public interface ProductService {

@@ -59,8 +59,8 @@
 					
                   
                   <td>
-                  <a  class="btn btn-success">Edit</a>
-                  <a  onClick="return confirm('Bạn chắc chắn không')" class="btn btn-danger">Delete</a>
+                  <a th:href="@{/admin/product-edit/{id}(id=${product.id})}" class="btn btn-success">Edit</a>
+                  <a th:href="@{/admin/product-delete/{id}(id=${product.id})}" onClick="return confirm('Bạn chắc chắn không')" class="btn btn-danger">Delete</a>
                   </td>
                 </tr>
                   
