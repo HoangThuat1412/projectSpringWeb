@@ -3,6 +3,9 @@ package com.projectvn.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.projectvn.models.Category;
@@ -68,6 +71,13 @@ public class CategoryServiceImpl  implements CategorySercive{
 	public List<Category> searchCategory(String keyword) {
 		// TODO Auto-generated method stub
 		return this.categoryRepository.searchCategory(keyword);
+	}
+
+	@Override
+	public Page<Category> getAll(Integer pageNo) {
+		// TODO Auto-generated method stub
+		Pageable pageable = PageRequest.of(pageNo-1, 2);
+		return this.categoryRepository.findAll(pageable);
 	}
 
 }

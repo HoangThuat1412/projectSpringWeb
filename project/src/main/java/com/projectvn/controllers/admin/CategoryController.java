@@ -3,6 +3,7 @@ package com.projectvn.controllers.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,17 @@ public class CategoryController {
 	@Autowired
 	private CategorySercive categorySercive;
 	@GetMapping("/category")
-	public String index(Model model, @RequestParam(value = "keyword", required = false ,defaultValue = "") String keyword) {
+	public String index(Model model, @RequestParam(value = "keyword", required = false ,defaultValue = "") String keyword ,@RequestParam(name="pageNo", defaultValue = "1") Integer pageNo) {
 		
-		List<Category> list = this.categorySercive.getAll();
+		Page<Category> list = this.categorySercive.getAll(pageNo);
 		
-		if(keyword != null) {
-			list = this.categorySercive.searchCategory(keyword);
-			model.addAttribute("keyword", keyword);
-		}
+//		if(keyword != null) {
+//			list = this.categorySercive.searchCategory(keyword);
+//			model.addAttribute("keyword", keyword);
+//		}
+		
+		model.addAttribute("totalPage", list.getTotalPages());
+		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("list",list);
 		return "admin/category/index";
 	}
