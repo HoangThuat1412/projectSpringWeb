@@ -3,6 +3,7 @@ package com.projectvn.controllers.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ import com.projectvn.services.CategorySercive;
 import com.projectvn.services.ProductService;
 import com.projectvn.services.StorageService;
 
+import net.bytebuddy.asm.Advice.This;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -34,14 +37,16 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	@RequestMapping("/product")
-	public String index(Model model, @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
+	public String index(Model model, @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword, @RequestParam(name="pageNo", defaultValue = "1") Integer pageNo) {
 		
-		List<Product> listCategory = this.productService.getAll();
-		if(keyword != null) {
-			listCategory = this.productService.searchProduct(keyword);
-			model.addAttribute("keyword", keyword);
-		}
+		Page<Product> listCategory = this.productService.getAll(pageNo);
 		
+//		if(keyword != null) {
+//			listCategory = this.productService.searchProduct(keyword);
+//			model.addAttribute("keyword", keyword);
+//		}
+		model.addAttribute("totalPage", listCategory.getTotalPages());
+		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("listCategory", listCategory);
 		return "admin/product/index";
 	}

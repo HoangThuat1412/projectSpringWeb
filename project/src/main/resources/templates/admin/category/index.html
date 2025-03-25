@@ -87,14 +87,22 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer clearfix">
+					
+						<!-- Nút quay về trang trước -->
 						<ul class="pagination pagination-sm no-margin pull-right">
-							<li th:if="${currentPage > 1}"><a th:href="@{'?pageNo='+${currentPage-1}}">«</a></li>
+							<li th:if="${currentPage > 1}">
+								<a th:href="@{'?pageNo='+${currentPage-1}}">«</a>
+								</li>
 							
+							<!-- Hiển thị các số trang -->
 							<li th:each="i:${#numbers.sequence(1,totalPage)}" 
 							th:classappend="${currentPage==i?'active':''}">
-							<a th:href="@{'?pageNo='+${i}}" th:text="${i}"></a>
+								<a th:href="@{'?pageNo='+${i}}" th:text="${i}"></a>
 							</li>
-							<li th:if="${currentPage < totalPage}"><a th:href="@{'?pageNo='+${currentPage+1}}">»</a></li>
+							 <!-- Nút sang trang tiếp theo -->
+							<li th:if="${currentPage < totalPage}">
+								<a th:href="@{'?pageNo='+${currentPage+1}}">»</a>
+							</li>
 						</ul>
 					</div>
 				</div>
