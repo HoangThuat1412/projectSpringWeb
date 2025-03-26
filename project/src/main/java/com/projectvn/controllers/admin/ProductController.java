@@ -41,10 +41,10 @@ public class ProductController {
 		
 		Page<Product> listCategory = this.productService.getAll(pageNo);
 		
-//		if(keyword != null) {
-//			listCategory = this.productService.searchProduct(keyword);
-//			model.addAttribute("keyword", keyword);
-//		}
+		if(keyword != null) {
+			listCategory = this.productService.searchProduct(keyword, pageNo);
+			model.addAttribute("keyword", keyword);
+		}
 		model.addAttribute("totalPage", listCategory.getTotalPages());
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("listCategory", listCategory);
