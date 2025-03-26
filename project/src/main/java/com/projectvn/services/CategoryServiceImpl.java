@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -78,6 +79,20 @@ public class CategoryServiceImpl  implements CategorySercive{
 		// TODO Auto-generated method stub
 		Pageable pageable = PageRequest.of(pageNo-1, 2);
 		return this.categoryRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Category> searchCategory(String keyword, Integer pageNo) {
+		List list = this.searchCategory(keyword);
+		
+		Pageable pageable = PageRequest.of(pageNo-1, 3);
+		Integer start = (int) pageable.getOffset();
+		
+		Integer end =(int) ((pageable.getOffset() + pageable.getPageSize()) 
+				> list.size() ? list.size() : pageable.getOffset() + pageable.getPageSize());
+		
+		list = list.subList(start, end);
+		return new PageImpl<Category>(list, pageable, this.searchCategory(keyword).size());
 	}
 
 }

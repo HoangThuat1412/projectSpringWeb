@@ -30,10 +30,10 @@ public class CategoryController {
 		
 		Page<Category> list = this.categorySercive.getAll(pageNo);
 		
-//		if(keyword != null) {
-//			list = this.categorySercive.searchCategory(keyword);
-//			model.addAttribute("keyword", keyword);
-//		}
+		if(keyword != null) {
+			list = this.categorySercive.searchCategory(keyword, pageNo);
+			model.addAttribute("keyword", keyword);
+		}
 		
 		model.addAttribute("totalPage", list.getTotalPages());
 		model.addAttribute("currentPage", pageNo);
